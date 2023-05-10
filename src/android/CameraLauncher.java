@@ -222,38 +222,17 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
     //--------------------------------------------------------------------------
     // LOCAL METHODS
     //--------------------------------------------------------------------------
-    // REMOVI A SOLICACTACAO DE PERMISSAO GRANULAR, UMA VEZ QUE JA TEMOS A READ_eXTERNAL_STORAGE
-    /**private String[] getPermissions(boolean storageOnly, int mediaType) {
-        if (android.os.Build.VERSION.SDK_INT >= 32) {
-            if (storageOnly) {
-                switch (mediaType) {
-                    case PICTURE:
-                        return new String[]{ Manifest.permission.READ_MEDIA_IMAGES };
-                    case VIDEO:
-                        return new String[]{ Manifest.permission.READ_MEDIA_VIDEO };
-                   default:
-                        return new String[]{ Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO };
-                }
-            }
-            else {
-                switch (mediaType) {
-                    case PICTURE:
-                        return new String[]{ Manifest.permission.CAMERA, Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES };
-                    case VIDEO:
-                        return new String[]{ Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_VIDEO };
-                    default:
-                        return new String[]{ Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO };
-                }
-            }
-        } else {
-            if (storageOnly) {
-                return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            } else {
-                return new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            }
-        }
-    }
- */
+    // REMOVI A SOLICACTACAO DE PERMISSAO GRANULAR, e validoso a superior como reade  reite. UMA VEZ QUE JA TEMOS A READ_eXTERNAL_STORAGE
+    private String[] getPermissions(boolean storageOnly) {
+           if (android.os.Build.VERSION.SDK_INT >= 32) {
+               if (storageOnly) {
+                   return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+               }
+           }
+           return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+       }
+
+ 
     private String getTempDirectoryPath() {
         File cache = cordova.getActivity().getCacheDir();
         // Create the cache directory if it doesn't exist
