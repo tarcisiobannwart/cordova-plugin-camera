@@ -223,14 +223,19 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
     // LOCAL METHODS
     //--------------------------------------------------------------------------
     // REMOVI A SOLICACTACAO DE PERMISSAO GRANULAR, e validoso a superior como reade  reite. UMA VEZ QUE JA TEMOS A READ_eXTERNAL_STORAGE
-    private String[] getPermissions(boolean storageOnly) {
-           if (android.os.Build.VERSION.SDK_INT >= 32) {
-               if (storageOnly) {
-                   return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-               }
-           }
-           return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-       }
+              private String[] getPermissions(boolean storageOnly, int mediaType) {
+                  if (android.os.Build.VERSION.SDK_INT >= 32) {
+                      if (storageOnly) {
+                          return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                      }
+                  }
+                  // Aqui você pode usar o valor de mediaType para determinar quais permissões são necessárias
+                  // Por exemplo (este é apenas um exemplo, você deve substituir pela lógica correta)
+                  if (mediaType == PICTURE || mediaType == VIDEO || mediaType == ALLMEDIA) {                
+                      return new String[]{Manifest.permission.CAMERA};
+                  }
+                  return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+              }
 
  
     private String getTempDirectoryPath() {
