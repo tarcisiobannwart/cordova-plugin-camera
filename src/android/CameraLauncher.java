@@ -222,8 +222,8 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
     //--------------------------------------------------------------------------
     // LOCAL METHODS
     //--------------------------------------------------------------------------
-
-    private String[] getPermissions(boolean storageOnly, int mediaType) {
+    // REMOVI A SOLICACTACAO DE PERMISSAO GRANULAR, UMA VEZ QUE JA TEMOS A READ_eXTERNAL_STORAGE
+    /**private String[] getPermissions(boolean storageOnly, int mediaType) {
         if (android.os.Build.VERSION.SDK_INT >= 32) {
             if (storageOnly) {
                 switch (mediaType) {
@@ -231,7 +231,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                         return new String[]{ Manifest.permission.READ_MEDIA_IMAGES };
                     case VIDEO:
                         return new String[]{ Manifest.permission.READ_MEDIA_VIDEO };
-                    default:
+                   default:
                         return new String[]{ Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO };
                 }
             }
@@ -253,7 +253,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
             }
         }
     }
-
+ */
     private String getTempDirectoryPath() {
         File cache = cordova.getActivity().getCacheDir();
         // Create the cache directory if it doesn't exist
